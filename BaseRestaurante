@@ -1,0 +1,116 @@
+// App.js
+import React from 'react';
+import { View, Text, Image, ImageBackground, StyleSheet, ScrollView } from 'react-native';
+
+export default function App() {
+  const pratos = [
+    {
+      id: 1,
+      nome: 'Macarronada',
+      descricao: 'Macarrão ao molho de tomate, carne moída e queijo ralado.',
+      imagem: 'https://cdn.pixabay.com/photo/2017/05/07/08/56/spaghetti-2291908_1280.jpg'
+    },
+    {
+      id: 2,
+      nome: 'Hambúrguer',
+      descricao: 'Pão brioche, hambúrguer de 180g, cheddar e molho da casa.',
+      imagem: 'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg'
+    },
+    {
+      id: 3,
+      nome: 'Pizza',
+      descricao: 'Molho de tomate, mussarela, tomate e manjericão fresco.',
+      imagem: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg'
+    },
+  ];
+
+  return (
+    <ScrollView style={styles.container}>
+      
+      /* Imagem Cabeçalho */
+      <ImageBackground
+        source={{ uri: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092' }}
+        style={styles.topImage}
+        resizeMode="cover"
+      >
+        <Text style={styles.imageText}>Best Restaurante</Text>
+      </ImageBackground>
+
+      /* Cardápio */
+      <View style={styles.menuSection}>
+        <Text style={styles.menuTitle}>Cardápio</Text>
+
+        {pratos.map(prato => (
+          <View key={prato.id} style={styles.card}>
+            <Image source={{ uri: prato.imagem }} style={styles.cardImage} />
+            <View style={styles.cardText}>
+              <Text style={styles.itemTitle}>{prato.nome}</Text>
+              <Text style={styles.itemDescription}>{prato.descricao}</Text>
+            </View>
+          </View>
+        ))}
+
+      </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  topImage: {
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 5,
+  },
+  menuSection: {
+    padding: 16,
+  },
+  menuTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#f8f8f8',
+    borderRadius: 12,
+    marginBottom: 16,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 2,
+    alignItems: 'center',
+  },
+  cardImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  cardText: {
+    flex: 1,
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  itemDescription: {
+    fontSize: 14,
+    color: '#555',
+  },
+});
